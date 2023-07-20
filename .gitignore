@@ -1,0 +1,9 @@
+*.swp
+*.tgz
+*.diff
+*.patch
+.env
+build/
+venv/
+*/venv/
+

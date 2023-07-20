@@ -1,0 +1,31 @@
+ARG BASE=quay.io/centos/centos:stream9
+ARG BUNDLE=bundle.tgz
+ARG ENTRYPOINT=python3
+ARG PACKAGE=demo
+ARG PACKAGES_OS=
+ARG PACKAGES_PIP=
+ARG USER_NAME=nobody
+ARG USER_UID=1000
+
+FROM "${BASE}"
+
+ARG BASE
+ARG BUNDLE
+ARG ENTRYPOINT
+ARG PACKAGE
+ARG PACKAGES_OS
+ARG PACKAGES_PIP
+ARG USER_NAME
+ARG USER_UID
+
+COPY scripts /opt/scripts
+COPY "${PACKAGES_OS}" "${PACKAGES_PIP}" /opt
+COPY "${BUNDLE}" /opt
+
+RUN /opt/scripts/build-image.sh "$(basename "${BASE}")" "/opt/$(basename "${BUNDLE}")" "${PACKAGES_OS}" "${PACKAGES_PIP}"
+
+USER "${USER_NAME}"
+WORKDIR /app
+ENTRYPOINT ["${ENTRYPOINT}"]
+CMD ["--version"]
+VOLUME ["/app"]

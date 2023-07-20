@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+#vim ft=py
+
+from demo import DEMO_VERSION
+
+if __name__ == '__main__':
+    print(f'Version: {DEMO_VERSION}')
