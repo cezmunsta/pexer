@@ -134,7 +134,7 @@ function build_pex {
     test -n "${pex_command}" || test -n "${pex_module}"
     test -n "${pex_output}"
 
-    cat "${REQUIREMENTS[@]}" <("/app/venv/bin/pip${PYTHON_VERSION}" freeze) | sed 's/ @ /@/g' > "${requirements}"
+    cat "${REQUIREMENTS[@]}" <("/app/venv/bin/pip${PYTHON_VERSION}" freeze) | sed 's/ @ /@/g' | grep -Ev '^pkg_resources==' > "${requirements}"
 
     if [ "${pex_command}" != "" ]; then
         /app/venv/bin/pex -r "${requirements}" -c "${pex_command}" -o "/app/${pex_output}${PYTHON_VERSION}" "${pex_extra_args[@]}"
