@@ -36,27 +36,27 @@ all_versions:
 all_el9: export BUILD_BASE=quay.io/centos/centos:stream9
 all_el9: export BUILD_BASE_TAG=centos-stream9
 all_el9: export PY=3.9
-all_el9: package build
+all_el9: build
 
 all_el8: export BUILD_BASE=quay.io/centos/centos:stream8
 all_el8: export BUILD_BASE_TAG=centos-stream8
 all_el8: export PY=3.9
-all_el8: package build
+all_el8: build
 
 all_el7: export BUILD_BASE=quay.io/centos/centos:7
 all_el7: export BUILD_BASE_TAG=centos-7
 all_el7: export PY=3.8
-all_el7: package build
+all_el7: build
 
 all_jammy: export BUILD_BASE=ubuntu:jammy
 all_jammy: export BUILD_BASE_TAG=ubuntu-jammy
 all_jammy: export PY=3.10
-all_jammy: package build
+all_jammy: build
 
 all_bullseye: export BUILD_BASE=debian:bullseye
 all_bullseye: export BUILD_BASE_TAG=debian-bullseye
 all_bullseye: export PY=3.9
-all_bullseye: package build
+all_bullseye: build
 
 build: prep package_image package_pex
 
