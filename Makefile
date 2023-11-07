@@ -19,6 +19,9 @@ PACKAGE?=demo
 PY?=3.9
 VERSION?=$(shell git rev-parse HEAD)
 
+# Override with code
+NOBODY_UID=65534
+
 # Constants
 BUILD_BASE_TAG:=$(shell echo "${BUILD_BASE}" | sed 's^.*/^^g; s/:/-/g' | cut -f2 -d'/')
 
@@ -28,7 +31,7 @@ NO_PACKAGE:=$(shell [ "${PACKAGE}" != "" ] && echo 0 || echo 1)
 
 init: prep
 
-all: build 
+all: build
 
 all_versions:
 	@printf "all_el9\nall_el8\nall_el7\nall_jammy\nall_bullseye"
@@ -45,6 +48,7 @@ all_el8: build
 
 all_el7: export BUILD_BASE=quay.io/centos/centos:7
 all_el7: export BUILD_BASE_TAG=centos-7
+all_el7: export NOBODY_UID=99
 all_el7: export PY=3.8
 all_el7: build
 
@@ -78,8 +82,8 @@ package_image:
 	  --build-arg PACKAGE="${PACKAGE}" \
 	  --build-arg PYTHON_VERSION="${PY}" \
 	  --build-arg USER_NAME=nobody \
-	  --build-arg USER_UID=65534 \
-	  --squash --no-cache --force-rm --compress --tag "${VNAME}" . 
+	  --build-arg USER_UID="${NOBODY_UID}" \
+	  --squash --no-cache --force-rm --compress --tag "${VNAME}" .
 
 package_pex: export VDIR=${BUILD_DIR}/${OS}/${ARCH}/${BUILD_BASE_TAG}
 package_pex: export VNAME=${PACKAGE}/${BUILD_BASE_TAG}:${VERSION}

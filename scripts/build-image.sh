@@ -26,7 +26,7 @@ function setup {
         ## https://developers.redhat.com/products/rhel/ubi
         "centos:stream8"|"centos:stream9") setup_redhat "${@}";;
         # TODO: remove el7 support completely, leaving as disabled now in case it is required
-        #"centos:7") setup_redhat_legacy "${@}";;
+        "centos:7") setup_redhat_legacy "${@}";;
         "ubuntu:22.04"|"ubuntu:jammy"|"debian:bullseye"|"debian:11") setup_debian "${@}";;
         #"python:3.10-slim") ;;
         *) echo "Unsupported distro: ${DISTRO}"; exit 1
@@ -175,8 +175,8 @@ id -un "${USERUID}" || {
         "${USERNAME}"
 }
 
-setup "${PACKAGES_OS[@]}"
 extract_bundle
+setup "${PACKAGES_OS[@]}"
 
 if [ "${PACKAGES_PIP[*]}" != "" ]; then
     prep "${PACKAGES_PIP[@]}"
