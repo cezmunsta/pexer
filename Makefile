@@ -33,10 +33,15 @@ all: build
 all_versions:
 	@printf "all_el9\nall_el8\nall_el7\nall_jammy\nall_bullseye"
 
-all_el9: export BUILD_BASE=quay.io/centos/centos:stream9
-all_el9: export BUILD_BASE_TAG=centos-stream9
+all_el9: export BUILD_BASE=docker.io/redhat/ubi9
+all_el9: export BUILD_BASE_TAG=el9
 all_el9: export PY=3.9
 all_el9: build
+
+all_ol9: export BUILD_BASE=docker.io/oraclelinux:9
+all_ol9: export BUILD_BASE_TAG=ol9
+all_ol9: export PY=3.9
+all_ol9: build
 
 all_el8: export BUILD_BASE=docker.io/redhat/ubi8
 all_el8: export BUILD_BASE_TAG=el8
