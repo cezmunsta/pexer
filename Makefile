@@ -28,7 +28,7 @@ NO_PACKAGE:=$(shell [ "${PACKAGE}" != "" ] && echo 0 || echo 1)
 
 init: prep
 
-all: build 
+all: build
 
 all_versions:
 	@printf "all_el9\nall_el8\nall_el7\nall_jammy\nall_bullseye"
@@ -38,10 +38,15 @@ all_el9: export BUILD_BASE_TAG=centos-stream9
 all_el9: export PY=3.9
 all_el9: build
 
-all_el8: export BUILD_BASE=quay.io/centos/centos:stream8
-all_el8: export BUILD_BASE_TAG=centos-stream8
+all_el8: export BUILD_BASE=docker.io/redhat/ubi8
+all_el8: export BUILD_BASE_TAG=el8
 all_el8: export PY=3.9
 all_el8: build
+
+all_ol8: export BUILD_BASE=docker.io/oraclelinux:8
+all_ol8: export BUILD_BASE_TAG=ol8
+all_ol8: export PY=3.9
+all_ol8: build
 
 all_el7: export BUILD_BASE=quay.io/centos/centos:7
 all_el7: export BUILD_BASE_TAG=centos-7
@@ -79,7 +84,7 @@ package_image:
 	  --build-arg PYTHON_VERSION="${PY}" \
 	  --build-arg USER_NAME=nobody \
 	  --build-arg USER_UID=65534 \
-	  --squash --no-cache --force-rm --compress --tag "${VNAME}" . 
+	  --squash --no-cache --force-rm --compress --tag "${VNAME}" .
 
 package_pex: export VDIR=${BUILD_DIR}/${OS}/${ARCH}/${BUILD_BASE_TAG}
 package_pex: export VNAME=${PACKAGE}/${BUILD_BASE_TAG}:${VERSION}

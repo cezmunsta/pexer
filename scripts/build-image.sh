@@ -24,7 +24,7 @@ function setup {
     case "${DISTRO}" in
         # TODO: add support for UBI - ubi, ubi-minimal, ubi-init
         ## https://developers.redhat.com/products/rhel/ubi
-        "centos:stream8"|"centos:stream9") setup_redhat "${@}";;
+        "centos:stream8"|"centos:stream9"|"ubi8"|"oraclelinux:8") setup_redhat "${@}";;
         # TODO: remove el7 support completely, leaving as disabled now in case it is required
         #"centos:7") setup_redhat_legacy "${@}";;
         "ubuntu:22.04"|"ubuntu:jammy"|"debian:bullseye"|"debian:11") setup_debian "${@}";;
@@ -68,7 +68,7 @@ function setup_redhat {
     dnf makecache -y
 
     case "${DISTRO}" in
-        "centos:stream8") packages+=( python38 python38-wheel python39 python39-wheel );;
+        "centos:stream8"|"ubi8"|"oraclelinux:8") packages+=( python38 python38-wheel python39 python39-wheel );;
         "centos:stream9") packages+=( python3 python-wheel-wheel ); repos=( "--enablerepo=crb" );
     esac
 
