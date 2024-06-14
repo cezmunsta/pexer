@@ -31,7 +31,7 @@ init: prep
 all: build
 
 all_versions:
-	@printf "all_el9\nall_el8\nall_el7\nall_jammy\nall_bullseye"
+	@printf "all_el9\nall_el8\nall_el7\nall_noble\nall_jammy\nall_focal\nall_bookworm\nall_bullseye\n"
 
 all_el9: export BUILD_BASE=docker.io/redhat/ubi9
 all_el9: export BUILD_BASE_TAG=el9
@@ -58,10 +58,25 @@ all_el7: export BUILD_BASE_TAG=centos-7
 all_el7: export PY=3.8
 all_el7: build
 
+all_noble: export BUILD_BASE=ubuntu:noble
+all_noble: export BUILD_BASE_TAG=ubuntu-noble
+all_noble: export PY=3.12
+all_noble: build
+
 all_jammy: export BUILD_BASE=ubuntu:jammy
 all_jammy: export BUILD_BASE_TAG=ubuntu-jammy
 all_jammy: export PY=3.10
 all_jammy: build
+
+all_focal: export BUILD_BASE=ubuntu:focal
+all_focal: export BUILD_BASE_TAG=ubuntu-focal
+all_focal: export PY=3.8
+all_focal: build
+
+all_bookworm: export BUILD_BASE=debian:bookworm
+all_bookworm: export BUILD_BASE_TAG=debian-bookworm
+all_bookworm: export PY=3.11
+all_bookworm: build
 
 all_bullseye: export BUILD_BASE=debian:bullseye
 all_bullseye: export BUILD_BASE_TAG=debian-bullseye
