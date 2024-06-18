@@ -70,7 +70,7 @@ all_jammy: build
 
 all_focal: export BUILD_BASE=ubuntu:focal
 all_focal: export BUILD_BASE_TAG=ubuntu-focal
-all_focal: export PY=3.8
+all_focal: export PY=3.9
 all_focal: build
 
 all_bookworm: export BUILD_BASE=debian:bookworm
