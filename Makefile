@@ -68,11 +68,6 @@ all_jammy: export BUILD_BASE_TAG=ubuntu-jammy
 all_jammy: export PY=3.10
 all_jammy: build
 
-all_focal: export BUILD_BASE=ubuntu:focal
-all_focal: export BUILD_BASE_TAG=ubuntu-focal
-all_focal: export PY=3.9
-all_focal: build
-
 all_bookworm: export BUILD_BASE=debian:bookworm
 all_bookworm: export BUILD_BASE_TAG=debian-bookworm
 all_bookworm: export PY=3.11
