@@ -31,7 +31,7 @@ init: prep
 all: build
 
 all_versions:
-	@printf "all_el9\nall_el8\nall_el7\nall_noble\nall_jammy\nall_focal\nall_bookworm\nall_bullseye\n"
+	@printf "all_el9\nall_el8\nall_el7\nall_noble\nall_jammy\nall_bookworm\nall_bullseye\n"
 
 all_el9: export BUILD_BASE=docker.io/redhat/ubi9
 all_el9: export BUILD_BASE_TAG=el9
